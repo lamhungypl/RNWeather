@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import SearchInput from './src/components/SearchInput';
 import Card from './src/components/Card';
-
+import Loading from './src/components/Loading';
 const API_KEY = '587b22a179e686349ea45a1e89040e3e';
 
 const App = () => {
+  const [weatherDetail, setWeatherDetail] = useState({});
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -26,10 +27,11 @@ const App = () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${API_KEY}&units=metric`;
     const result = await fetch(url);
     const data = await result.json();
+    setWeatherDetail(data);
     const {
       name: city,
       sys: {country},
-      weather: [{description}],
+      weather: [{description, icon}],
       main: {temp: temperature, humidity},
       wind: {speed: windSpeed},
     } = data;
@@ -40,6 +42,7 @@ const App = () => {
       temperature,
       humidity,
       windSpeed,
+      icon,
     });
     setIsLoading(false);
   };
@@ -47,7 +50,8 @@ const App = () => {
     <View style={styles.container}>
       <Text>Hello</Text>
       <SearchInput fetchData={fetchData} />
-      <Card weather={weather} />
+      {isLoading && <Loading />}
+      {!isLoading && <Card weather={weather} />}
     </View>
   );
 };

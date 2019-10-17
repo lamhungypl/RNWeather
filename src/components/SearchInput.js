@@ -9,8 +9,10 @@ const SearchInput = ({fetchData}) => {
         onChangeText={text => setValue(text)}
         style={styles.searchInput}
         placeholder={'city'}
-        placeholderTextColor="lightblue"></TextInput>
-      <Button title="Search" onPress={() => fetchData(value)} />
+        placeholderTextColor="lightblue"
+        onSubmitEditing={() => fetchData(value)}
+      />
+      {/* <Button title="Search" onPress={() => fetchData(value)} /> */}
     </View>
   );
 };
@@ -18,14 +20,15 @@ const SearchInput = ({fetchData}) => {
 const styles = StyleSheet.create({
   searchContainer: {
     flex: 1,
-
+    marginLeft: 20,
+    marginRight: 20,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   searchInput: {
     flex: 1,
-    height: 40,
+    height: 60,
     borderWidth: 1,
     borderColor: '#abbabb',
     borderRadius: 3,

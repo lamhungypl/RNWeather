@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   cardView: {
     marginLeft: 20,
     marginRight: 20,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(128,128,0,0.1)',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: 'blue',
@@ -77,14 +77,17 @@ const styles = StyleSheet.create({
     height: 100,
   },
   textTop: {
+    color: 'white',
     fontSize: 20,
     textAlign: 'left',
   },
   textMiddle: {
+    color: 'white',
     fontSize: 50,
     fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
   },
   textBot: {
+    color: 'white',
     textAlign: 'right',
     fontSize: 18,
   },

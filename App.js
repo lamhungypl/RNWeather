@@ -11,9 +11,12 @@ import SearchInput from './src/components/SearchInput';
 import Card from './src/components/Card';
 import Loading from './src/components/Loading';
 import getImageToWeather from './src/api/getImageToWeather';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import CardDetail from './src/components/CardDetail';
 const API_KEY = '587b22a179e686349ea45a1e89040e3e';
 
-const App = () => {
+const App = props => {
   const [weatherDetail, setWeatherDetail] = useState({});
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +62,7 @@ const App = () => {
       <View style={styles.container}>
         <SearchInput fetchData={fetchData} />
         {isLoading && <Loading />}
-        {!isLoading && <Card weather={weather} />}
+        {!isLoading && <Card weather={weather} navigation={props.navigation} />}
       </View>
     </ImageBackground>
   );
@@ -74,4 +77,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const AppNavigator = createStackNavigator(
+  {
+    Home: App,
+    Detail: CardDetail,
+  },
+  {
+    initialRouteName: 'Home',
+  },
+);
+
+export default createAppContainer(AppNavigator);

@@ -12,7 +12,11 @@ const Card = props => {
   } = props.weather;
   const imgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   return (
-    <TouchableOpacity style={styles.cardContainer}>
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={() => {
+        props.navigation.navigate('Detail');
+      }}>
       <View style={styles.cardView}>
         <View style={styles.viewTop}>
           <Text style={styles.textTop}>
@@ -54,7 +58,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 5, height: 5},
     shadowOpacity: 0.8,
     shadowRadius: 5,
-    elevation: 5,
     width: 350,
     height: 450,
     justifyContent: 'space-between',
